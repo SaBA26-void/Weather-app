@@ -1,6 +1,11 @@
 function getForcast() {
     let city = document.getElementById('city').value || 'Telaviv';
     let days = document.getElementById('days').value || 7;
+
+    if (days < 1) days = 1;
+    if (days > 7) days = 7;
+
+
     fetch(
         `https://api.weatherapi.com/v1/forecast.json?key=f02d3193a4a04f8191e161138252811&q=${city}&days=${days}&aqi=no&alerts=no`
     )
