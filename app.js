@@ -23,8 +23,8 @@ function getForcast() {
                     `
             <h3>${day.date}<h3/>
             <h3>${day.day.condition.text}<h3/>
-            <h4>${day.day.maxtemp_c}℃<h4/>
-            <h4>${day.day.mintemp_c}℃<h4/>
+            <h4>Max ${day.day.maxtemp_c}℃<h4/>
+            <h4>Min ${day.day.mintemp_c}℃<h4/>
             <img src="${day.day.condition.icon}" alt="${day.day.condition.text}">
             `;
                 forecastContainer.appendChild(dayCard);
