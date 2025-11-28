@@ -1,0 +1,169 @@
+/* Base styles (desktop-first) */
+html {
+  font-size: 62.5%;
+  font-family: Sansita, sans-serif, Arial, Helvetica, sans-serif;
+}
+
+body {
+  text-align: center;
+}
+
+.h1-title {
+  font-size: 5rem;
+  color: navy;
+  font-weight: bolder;
+}
+
+.input-div {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* allow wrapping on smaller screens */
+  margin: 2rem;
+  gap: 10px;
+  font-size: 2rem;
+  background-color: #3423a6;
+  color: white;
+  padding: 10rem;
+  border-radius: 50px;
+}
+
+.input-div label,
+input[type="submit"] {
+  margin-left: 3rem;
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  background-color: #f4f4f4;
+  color: #3423a6;
+  font-weight: bold;
+  border: none;
+  border-radius: 900px;
+  padding: 1rem 3rem;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.btn:hover {
+  box-shadow: 0 0 20px #ebfeff;
+  transform: scale(1.05);
+}
+
+.btn:active {
+  transform: scale(0.9);
+  color: #ffffff;
+  background-color: #3423a6;
+  box-shadow: 0 0 0 #3423a6;
+}
+
+input {
+  outline: 0;
+  border: 0;
+  border-radius: 900px;
+  padding: 1rem 2rem;
+  color: navy;
+  font-size: 2rem;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+input:focus {
+  box-shadow: 0 0 10px 1px #ffffff;
+}
+
+.forecast-div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.day-card {
+  margin: 1rem;
+  background-color: #3423a6;
+  border-radius: 20px;
+  padding: 1.5rem;
+  color: #fff;
+  font-size: 2rem;
+  max-width: 30rem;
+}
+
+/* ✅ Tablet (portrait & landscape) */
+@media (max-width: 1024px) {
+  .h1-title {
+    font-size: 4rem;
+  }
+
+  .input-div {
+    padding: 5rem;
+    font-size: 1.8rem;
+    border-radius: 40px;
+  }
+
+  .day-card {
+    font-size: 1.8rem;
+    max-width: 25rem;
+  }
+}
+
+/* ✅ Mobile */
+@media (max-width: 600px) {
+  .h1-title {
+    font-size: 3rem;
+  }
+
+  .input-div {
+    flex-direction: column; /* stack inputs vertically */
+    padding: 1rem;
+    gap: 1rem;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .input-div label,
+  input,
+  .btn {
+    font-size: 1.6rem;
+    margin-left: 0;
+    width: 80%;
+  }
+
+  input[type="submit"] {
+    margin-left: 0px;
+  }
+
+  .day-card {
+    font-size: 2.6rem;
+    max-width: 100%;
+    border-radius: 15px;
+  }
+}
+
+.footer {
+  background-color: #3423a6; /* same theme as input-div */
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.6rem;
+  margin-top: 3rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .footer {
+    font-size: 1.4rem;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .footer {
+    font-size: 1.5rem;
+    padding: 1.8rem;
+  }
+}
+a {
+  color: #fff;
+  text-decoration: none;
+}
