@@ -28,7 +28,7 @@ function getForcast() {
                 <div>Local Date-Time: ${data.location.localtime}<div/>
                 <div>Temp ℃: ${data.current.temp_c}<div/>
                 <div>Feelslike Temp ℃: ${data.current.feelslike_c}<div/>
-                <div class="img-city-div">Temp ℃: ${data.current.condition.text}
+                <div class="img-city-div">Current Condition: ${data.current.condition.text}
                 <img src="${data.current.condition.icon}" />
                 <div/>
             `;
