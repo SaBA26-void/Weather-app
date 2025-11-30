@@ -1,4 +1,7 @@
 function getForcast() {
+    if (document.querySelector('.day-card')) {
+        document.querySelectorAll('.day-card').forEach(e => e.remove());
+    }
     let city = document.getElementById('city').value || 'Telaviv';
     let days = document.getElementById('days').value || 7;
 
@@ -15,6 +18,21 @@ function getForcast() {
         .then((data) => {
             console.log('forcast days:', data.forecast.forecastday);
             const forecastContainer = document.querySelector('.forecast-div');
+            const cityDiv = document.querySelector('.city-div');
+            cityDiv.innerHTML = `<h4>Current Weather</h4>`;
+            const city = document.createElement('div');
+            city.classList.add('city-div-element');
+            city.innerHTML = `
+                <div>Last Updated: ${data.current.last_updated}<div/>
+                <div>Location: ${data.location.name}<div/>
+                <div>Local Date-Time: ${data.location.localtime}<div/>
+                <div>Temp ℃: ${data.current.temp_c}<div/>
+                <div>Feelslike Temp ℃: ${data.current.feelslike_c}<div/>
+                <div class="img-city-div">Temp ℃: ${data.current.condition.text}
+                <img src="${data.current.condition.icon}" />
+                <div/>
+            `;
+            cityDiv.appendChild(city);
             data.forecast.forecastday.forEach(day => {
                 console.log('date:', day.date, '\n',
                     'condition:', day.day.condition.text, '\n',
@@ -26,11 +44,11 @@ function getForcast() {
                 dayCard.classList.add('day-card');
                 dayCard.innerHTML =
                     `
-            <h3>${day.date}<h3/>
-            <h3>${day.day.condition.text}<h3/>
-            <h4>Max ${day.day.maxtemp_c}℃<h4/>
-            <h4>Min ${day.day.mintemp_c}℃<h4/>
-            <img src="${day.day.condition.icon}" alt="${day.day.condition.text}">
+                    <h3>${day.date}<h3/>
+                    <h3>${day.day.condition.text}<h3/>
+                    <h4 class="temp">Max ${day.day.maxtemp_c}℃<h4/>
+                    <h4 class="temp">Min ${day.day.mintemp_c}℃<h4/>
+                    <img src="${day.day.condition.icon}" alt="${day.day.condition.text}">
             `;
                 forecastContainer.appendChild(dayCard);
             });

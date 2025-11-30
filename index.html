@@ -23,19 +23,27 @@
   </head>
   <body>
     <h1 class="h1-title">⛅Weather-app🌤️</h1>
-    <div class="input-div">
-      <label for="city">City</label>
-      <input type="text" id="city" placeholder="Telaviv" />
-      <label for="days">Days</label>
-      <input
-        type="number"
-        min="1"
-        max="7"
-        style="min-width: 20rem"
-        id="days"
-        placeholder="7"
-      />
-      <input type="button" value="Get Forecast" class="btn" onclick="getForcast()" />
+    <div class="big-div">
+      <div class="input-div">
+        <label for="city">City</label>
+        <input type="text" id="city" placeholder="Telaviv" />
+        <label for="days">Days</label>
+        <input
+          type="number"
+          min="1"
+          max="7"
+          style="min-width: 20rem"
+          id="days"
+          placeholder="7"
+        />
+        <input
+          type="button"
+          value="Get Forecast"
+          class="btn"
+          onclick="getForcast()"
+        />
+      </div>
+      <div class="city-div"></div>
     </div>
     <div class="forecast-div"></div>
     <footer class="footer">
@@ -46,9 +54,10 @@
           Profile</a
         >
       </p>
+      <p>
         <a href="https://ge.linkedin.com/in/saba-bakuradze" target="_blank"
-          ><i class="fa-brands fa-linkedin" style="color: #ffffff;"></i>  My LinkedIn
-          Profile</a
+          ><i class="fa-brands fa-linkedin" style="color: #ffffff"></i> My
+          LinkedIn Profile</a
         >
       </p>
       <script src="app.js"></script>
