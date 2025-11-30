@@ -61,3 +61,10 @@ function getWeekDays(day) {
     const weekDay = new Date(day.date).toLocaleDateString('en-US', { weekday: 'long' });
     return weekDay;
 }
+
+document.getElementById("city").addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault(); // prevent form submission / page reload
+        getForcast();
+    }
+});
