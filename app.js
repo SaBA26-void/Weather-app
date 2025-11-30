@@ -3,14 +3,9 @@ function getForcast() {
         document.querySelectorAll('.day-card').forEach(e => e.remove());
     }
     let city = document.getElementById('city').value || 'Telaviv';
-    let days = document.getElementById('days').value || 7;
-
-    if (days < 1) days = 1;
-    if (days > 7) days = 7;
-
 
     fetch(
-        `https://api.weatherapi.com/v1/forecast.json?key=f02d3193a4a04f8191e161138252811&q=${city}&days=${days}&aqi=no&alerts=no`
+        `https://api.weatherapi.com/v1/forecast.json?key=f02d3193a4a04f8191e161138252811&q=${city}&days=14&aqi=no&alerts=no`
     )
         .then((response) => {
             return response.json();
@@ -33,26 +28,36 @@ function getForcast() {
                 <div/>
             `;
             cityDiv.appendChild(city);
+            let i = 0;
             data.forecast.forecastday.forEach(day => {
+                i++;
                 console.log('date:', day.date, '\n',
                     'condition:', day.day.condition.text, '\n',
                     'max temp:', day.day.maxtemp_c, '\n',
                     'min temp:', day.day.mintemp_c, '\n'
                 );
-
                 const dayCard = document.createElement('div');
                 dayCard.classList.add('day-card');
                 dayCard.innerHTML =
                     `
-                    <h3>${day.date}<h3/>
-                    <h3>${day.day.condition.text}<h3/>
+                    <h2 style="color: #1e3a8a;">${getWeekDays(day)}<h2/>
+                    <h4 style="color: #1e3a8a;">${day.date}<h4/>
                     <h4 class="temp">Max ${day.day.maxtemp_c}℃<h4/>
                     <h4 class="temp">Min ${day.day.mintemp_c}℃<h4/>
+                    <h3>${day.day.condition.text}<h3/>
                     <img src="${day.day.condition.icon}" alt="${day.day.condition.text}">
-            `;
+                    `;
+                if (i > 7) {
+                    dayCard.style.backgroundColor = '#8a1e1eff';
+                }
                 forecastContainer.appendChild(dayCard);
             });
             console.log(data);
         })
         .catch((error) => console.log(error));
+}
+
+function getWeekDays(day) {
+    const weekDay = new Date(day.date).toLocaleDateString('en-US', { weekday: 'long' });
+    return weekDay;
 }
