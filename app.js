@@ -2,7 +2,7 @@ function getForcast() {
     if (document.querySelector('.day-card')) {
         document.querySelectorAll('.day-card').forEach(e => e.remove());
     }
-    let city = document.getElementById('city').value || 'Telaviv';
+    let city = document.getElementById('city').value || 'Mestia';
 
     fetch(
         `https://api.weatherapi.com/v1/forecast.json?key=f02d3193a4a04f8191e161138252811&q=${city}&days=14&aqi=no&alerts=no`
@@ -49,10 +49,10 @@ function getForcast() {
                     `;
                 if (i > 7) {
                     dayCard.style.backgroundColor = '#8a1e1eff';
+                    dayCard.innerHTML += `<h4 style="color: #1e3a8a;">Week 2, may be inaccurate<h4/>`;
                 }
                 forecastContainer.appendChild(dayCard);
             });
-            console.log(data);
         })
         .catch((error) => console.log(error));
 }
@@ -98,17 +98,17 @@ function getDefaultForecast() {
                 .catch(error => console.log('Error fetching default forecast:', error));
         }, error => {
             console.log('Geolocation error:', error);
-            getForcast(); // Fallback to default city
+            getForcast();
         });
     } else {
         console.log('Geolocation not supported by this browser.');
-        getForcast(); // Fallback to default city
+        getForcast();
     }
 }
 
 document.getElementById("city").addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
-        event.preventDefault(); // prevent form submission / page reload
+        event.preventDefault();
         getForcast();
     }
 });
