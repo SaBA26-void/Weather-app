@@ -367,6 +367,7 @@ body {
   border-radius: 16px;
   border: 2px solid rgba(59, 130, 246, 0.3);
   animation: fadeInUp 0.8s ease-out 0.8s both;
+  overflow-x: hidden;
 }
 
 .footer p {
@@ -537,5 +538,35 @@ body {
 @media (min-width: 1280px) {
   .forecast-div {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.suggestions-container {
+  color: #ffffff;
+  background-color: #3b82f6;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.suggestion-item {
+  padding: 1.5rem 2rem;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: navy;
+}
+.suggestion-item:active {
+  transform: scale(1.01);
+  background-color: tomato;
+}
+
+#footer-text {
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 600px) {
+  #footer-text {
+    font-size: 1.5rem;
   }
 }

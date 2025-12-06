@@ -62,9 +62,66 @@ function getWeekDays(day) {
     return weekDay;
 }
 
+// Fetch and display city suggestions
+function fetchCitySuggestions(query) {
+    fetch(`https://api.weatherapi.com/v1/search.json?key=f02d3193a4a04f8191e161138252811&q=${query}`)
+        .then(response => response.json())
+        .then(data => {
+            const suggestions = document.getElementById('city-suggestions');
+            suggestions.innerHTML = '';
+            data.forEach(city => {
+                const option = document.createElement('div');
+                option.classList.add('suggestion-item');
+                option.textContent = city.name;
+                option.addEventListener('click', () => {
+                    document.getElementById('city').value = city.name;
+                    suggestions.innerHTML = '';
+                    getForcast();
+                });
+                suggestions.appendChild(option);
+            });
+        })
+        .catch(error => console.log('Error fetching city suggestions:', error));
+}
+
+// Get default weather forecast based on user's location
+function getDefaultForecast() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+            const { latitude, longitude } = position.coords;
+            fetch(`https://api.weatherapi.com/v1/forecast.json?key=f02d3193a4a04f8191e161138252811&q=${latitude},${longitude}&days=14&aqi=no&alerts=no`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('city').value = data.location.name;
+                    getForcast();
+                })
+                .catch(error => console.log('Error fetching default forecast:', error));
+        }, error => {
+            console.log('Geolocation error:', error);
+            getForcast(); // Fallback to default city
+        });
+    } else {
+        console.log('Geolocation not supported by this browser.');
+        getForcast(); // Fallback to default city
+    }
+}
+
 document.getElementById("city").addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
         event.preventDefault(); // prevent form submission / page reload
         getForcast();
     }
 });
+
+// Event listener for city input suggestions
+document.getElementById('city').addEventListener('input', function () {
+    const query = this.value;
+    if (query.length > 2) {
+        fetchCitySuggestions(query);
+    } else {
+        document.getElementById('city-suggestions').innerHTML = '';
+    }
+});
+
+// Call default forecast on page load
+window.addEventListener('load', getDefaultForecast);
